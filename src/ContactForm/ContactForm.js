@@ -6,17 +6,20 @@ function ContactForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  console.log(name);
-  console.log(number);
+  const handleChange = e => {
+    const { name, value } = e.target;
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
 
-  const handleNameChange = e => {
-    const { value } = e.target;
-    setName(value);
-  };
+      case 'number':
+        setNumber(value);
+        break;
 
-  const handleNumberChange = e => {
-    const { value } = e.target;
-    setNumber(value);
+      default:
+        break;
+    }
   };
 
   const handleSubmit = e => {
@@ -59,7 +62,7 @@ function ContactForm({ onSubmit }) {
                     title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
                     required
                     value={name}
-                    onChange={handleNameChange}
+                    onChange={handleChange}
                     className={s.appFormControl}
                   />
                 </label>
@@ -72,7 +75,7 @@ function ContactForm({ onSubmit }) {
                     title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
                     required
                     value={number}
-                    onChange={handleNumberChange}
+                    onChange={handleChange}
                     className={s.appFormControl}
                   />
                 </label>
