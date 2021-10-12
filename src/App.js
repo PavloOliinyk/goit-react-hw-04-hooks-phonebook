@@ -7,26 +7,15 @@ import ContactList from './ContactList';
 import Contact from './ContactList/Contact';
 
 function App() {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(window.localStorage.getItem('contacts')) ?? [],
+  );
+
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    console.log(`вызов useEffect`);
-  });
-
-  // componentDidMount() {
-  //   const contacts = JSON.parse(localStorage.getItem('contacts'));
-
-  //   if (contacts) {
-  //     this.setState({ contacts });
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.contacts.length !== this.state.contacts.length) {
-  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  //   }
-  // }
+    window.localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   const deleteContact = id => {
     setContacts(state => state.filter(contact => contact.id !== id));
